@@ -12,10 +12,19 @@ using System.Windows.Forms;
 namespace Baze_de_Date
 {
 
+   
+
     public partial class Form1 : Form
     {
-        public Form1()
+
+        private Login var;
+        string username_param;
+
+        public Form1(Login login, string user)
         {
+            var = login;
+            username_param = user; // username param va fi dat mai departe ca parametru pt a accesa valorile userului din tabele
+
             InitializeComponent();
             post p = new post(panel1);
         //    post p1 = new post(panel1);

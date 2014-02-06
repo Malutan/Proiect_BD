@@ -65,7 +65,8 @@ namespace Baze_de_Date
             bool ok = b.LoginUser(log_user_tbox.Text, log_pass_tbox.Text);
             if (ok)
             {
-                var main = new Form1();
+                var main = new Form1(this, log_user_tbox.Text); // transmit parametru username spre Form1
+               // var main = new Form1();
                 this.Hide();
                 main.Show();
                 

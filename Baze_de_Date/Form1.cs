@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Baze_de_Date.DMA_BusinessLayer;
 
 
 namespace Baze_de_Date
@@ -24,8 +25,10 @@ namespace Baze_de_Date
         {
             var = login;
             username_param = user; // username param va fi dat mai departe ca parametru pt a accesa valorile userului din tabele
+            
 
             InitializeComponent();
+            label2.Text = username_param;
             post p = new post(panel1);
         //    post p1 = new post(panel1);
             post1 a = new post1(panel1);
@@ -82,11 +85,58 @@ namespace Baze_de_Date
             Application.Exit();
         }
 
+        private void edit_button_Click(object sender, EventArgs e)
+        {
+            groupBox1.Visible = true;
+            label3.Visible = false;
+            label4.Visible = false;
+            label7.Visible = false;
+            label8.Visible = false;
+            label9.Visible = false;
+            label10.Visible = false;
+        }
+
+        private void cancel_Click(object sender, EventArgs e)
+        {
+            groupBox1.Visible = false;
+            label3.Visible = true;
+            label4.Visible = true;
+            label7.Visible = true;
+            label8.Visible = true;
+            label9.Visible = true;
+            label10.Visible = true;
+        }
+
+        private void about_button_Click(object sender, EventArgs e)
+        {
+            DMA_BusinessLayerClass b = new DMA_BusinessLayerClass();
+            DataTable dt = b.About(label2.Text);
+            if (dt.Rows.Count > 0)
+            {
+                label3.Text = dt.Rows[0][1].ToString().Trim();
+                label4.Text = dt.Rows[0][2].ToString().Trim();
+                label7.Text = dt.Rows[0][3].ToString().Trim();
+                label8.Text = dt.Rows[0][4].ToString().Trim();
+                label9.Text = dt.Rows[0][5].ToString().Trim();
+                label10.Text = dt.Rows[0][6].ToString().Trim();
+
+                panel_about.Visible = true;
+            }
+            else
+                MessageBox.Show("Eroare deschidere About!");
+        }
+
+        private void ok_button_Click(object sender, EventArgs e)
+        {
+            panel_about.Visible = false;
+        }
+
+       
+
     };
     
     public class antet
-    {   //adaugata de mihai pt testare commit
-        int mihai = 0;
+    {   
         PictureBox coperta;
         PictureBox profil;
        public antet(){

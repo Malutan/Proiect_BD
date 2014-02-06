@@ -16,5 +16,15 @@ namespace Baze_de_Date
         {
             InitializeComponent();
         }
+
+        private void passlabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

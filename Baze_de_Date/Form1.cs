@@ -63,10 +63,16 @@ namespace Baze_de_Date
         //    scriu statusul in baza de date
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
     };
     
     public class antet
-    {
+    {   //adaugata de mihai pt testare commit
+        int mihai = 0;
         PictureBox coperta;
         PictureBox profil;
        public antet(){

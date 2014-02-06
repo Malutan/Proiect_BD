@@ -68,6 +68,11 @@ namespace Baze_de_Date
 
         }
 
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
     };
     
     public class antet

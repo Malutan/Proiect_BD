@@ -12,10 +12,10 @@ using System.Configuration;
 
 namespace Baze_de_Date.DMA_DataLayer
 {
-  public  class DMA_DatalayerClass
+    public class DMA_DatalayerClass
     {
         string ConString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-     //string  connStudent = new SqlConnection(ConfigurationManager.AppSettings["connectstring"].ToString());
+        //string  connStudent = new SqlConnection(ConfigurationManager.AppSettings["connectstring"].ToString());
         DataTable dt = new DataTable();
 
         SqlDataAdapter myAdapter = new SqlDataAdapter();
@@ -58,43 +58,60 @@ namespace Baze_de_Date.DMA_DataLayer
             }
         }
 
+        public DataTable About(string username)
+        {
+            con = openConnection();
+
+            SqlCommand cmd = new SqlCommand("select * from dbo.Despre where Username = '" + username + "'", con);
+            try
+            {
+                SqlDataReader rd = cmd.ExecuteReader();
+                dt.Load(rd);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
 
         public bool Login(string username, string password)
         {
             con = openConnection();
             SqlCommand cmd = new SqlCommand("select * from dbo.Accounts where (Username= '" + username + "' and Password= '" + password + "')", con);
-           
-                SqlDataReader rd = cmd.ExecuteReader();
-                  dt.Load(rd);
-                if(dt.Rows.Count>0)
-               {
-                 
-                   
-                  
-                    string a = dt.Rows[0][0].ToString().Trim();
-                    string b = dt.Rows[0][1].ToString().Trim();
+
+            SqlDataReader rd = cmd.ExecuteReader();
+            dt.Load(rd);
+            if (dt.Rows.Count > 0)
+            {
 
 
 
-                    if (a == username && b == password)
-                    {
-                        MessageBox.Show("Login Succesful!");
-                        return true;
+                string a = dt.Rows[0][0].ToString().Trim();
+                string b = dt.Rows[0][1].ToString().Trim();
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid Username or Password");
-                        return false;
-                    }
-               }
-                    else
-               {
-                   MessageBox.Show("Invalid Username or Password");
-                   return false;
-               }
 
-         }
+
+                if (a == username && b == password)
+                {
+                    MessageBox.Show("Login Succesful!");
+                    return true;
+
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Username or Password");
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid Username or Password");
+                return false;
+            }
+
+        }
 
 
         private bool executeAddNewAccount(string procedure_name, SqlParameter[] SqlParameter)
@@ -103,7 +120,7 @@ namespace Baze_de_Date.DMA_DataLayer
             con = openConnection();
             try
             {
-                comm.Connection =con;
+                comm.Connection = con;
                 comm.CommandText = procedure_name;
                 comm.CommandType = CommandType.StoredProcedure;
                 comm.Parameters.AddRange(SqlParameter);
@@ -136,12 +153,40 @@ namespace Baze_de_Date.DMA_DataLayer
 
             sqlParameters[0] = new SqlParameter("@username", data_username);
             sqlParameters[1] = new SqlParameter("@password", data_password);
-           
+
 
 
             return executeAddNewAccount("RegisterAccount", sqlParameters);
         }
 
-      }//end class
-  
+
+        public bool ModifyAbout(string user, string birth, string gender, string interest, string city, string religion, string relationship)
+        {
+            try
+            {
+                con = openConnection();
+
+                System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
+                cmd.CommandText = "update dbo.Despre set  Data_nasterii='" + birth + "',Gender='" + gender + "',Interested='" + interest + "',Localitate='" + city + "',Religie='" + religion + "',Relationship='" + relationship + "' where Username='" + user + "'";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Connection = con;
+                cmd.ExecuteNonQuery();
+
+                // con.Close();
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("Could not edit!");
+                return false;
+            }
+
+
+
+        }
+
+
+
+    }//end class
+
 }//end namespace

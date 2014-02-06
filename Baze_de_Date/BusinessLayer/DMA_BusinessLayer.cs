@@ -15,16 +15,28 @@ namespace Baze_de_Date.DMA_BusinessLayer
     class DMA_BusinessLayerClass
     {
 
-        public bool LoginUser(string username, string password)
+        public bool ModifyAbout(string user, string birth, string gender, string interest, string city, string religion, string relationship)
         {
-            
-            
-                DMA_DatalayerClass objdata = new DMA_DatalayerClass();
-                return objdata.Login(username, password);  
-            
+            DMA_DatalayerClass objdata = new DMA_DatalayerClass();
+            return objdata.ModifyAbout(user, birth, gender, interest, city, religion, relationship);
         }
 
-        public bool AddNewAccount_BL(String username, String password,string pass2)
+        public DataTable About(string username)
+        {
+            DMA_DatalayerClass objdata = new DMA_DatalayerClass();
+            return objdata.About(username);
+        }
+
+        public bool LoginUser(string username, string password)
+        {
+
+
+            DMA_DatalayerClass objdata = new DMA_DatalayerClass();
+            return objdata.Login(username, password);
+
+        }
+
+        public bool AddNewAccount_BL(String username, String password, string pass2)
         {
 
             DMA_DatalayerClass objdata = new DMA_DatalayerClass();
@@ -43,8 +55,8 @@ namespace Baze_de_Date.DMA_BusinessLayer
                 MessageBox.Show("That username is already in the database!");
                 return false;
             }
-           
-            return objdata.RegisterAccount(username, password,pass2);
+
+            return objdata.RegisterAccount(username, password, pass2);
         }
 
 

@@ -30,7 +30,10 @@ namespace Baze_de_Date
         //    post p1 = new post(panel1);
             post1 a = new post1(panel1);
             post b = new post(panel1);
+            antet ant = new antet(pan_antet);
+            info inf= new info(pan_info);
             //init_perete();
+            prieteni priet=new prieteni(pan_friends);
         }
 
 
@@ -84,22 +87,13 @@ namespace Baze_de_Date
 
     };
     
-    public class antet
-    {   //adaugata de mihai pt testare commit
-        int mihai = 0;
-        PictureBox coperta;
-        PictureBox profil;
-       public antet(){
-    //       coperta;
-           
-       }
-    }
+  
 
     public class post1{
         TextBox  txt;
         Label lbl;
-        int top = 150;
-        int left = 200;
+        int top = 240;
+        int left = 230;
         Button btn;
         public post1(Panel p)
         {
@@ -129,14 +123,148 @@ namespace Baze_de_Date
 
     };
 
+
+    public class antet
+    {
+        PictureBox coperta;
+        PictureBox profil;
+        GroupBox butoane;
+        public antet(Panel p)
+        {
+            //       profil;
+            profil = new PictureBox();
+            profil.Width = 120;
+            profil.Height = 120;
+            profil.BringToFront();
+            profil.Top = 60;
+            profil.Left = 20;
+            profil.BorderStyle = BorderStyle.Fixed3D;
+            profil.BackColor = System.Drawing.Color.Black;
+            profil.ImageLocation = @"..\..\imagini\profil1.jpg";
+            p.Controls.Add(profil);
+
+            //coperta
+            coperta = new PictureBox();
+            coperta.Width = 600;
+            coperta.Height = 160;
+            coperta.BackColor = System.Drawing.Color.Violet;
+            coperta.ImageLocation = @"..\..\imagini\cover1.jpg";
+            coperta.SendToBack();
+            p.Controls.Add(coperta);
+
+            butoane = new GroupBox();
+            butoane.BackColor = System.Drawing.Color.AntiqueWhite;
+            butoane.Top = 150;
+            butoane.Width = 600;
+            butoane.Height = 50;
+
+            Label timeline = new Label();
+            timeline.Text = "Timeline";
+            timeline.Top = 165;
+            timeline.Width = 65;
+            timeline.Left = 200;
+            timeline.Font = new System.Drawing.Font("Arial", 10, FontStyle.Bold);
+            timeline.ForeColor = System.Drawing.Color.Black;
+            timeline.BackColor = System.Drawing.Color.AntiqueWhite;
+
+
+            Label about = new Label();
+            about.Text = "Despre";
+            about.Top = 165;
+            about.Left = 200;
+            about.Width = 60;
+            about.Left = 270;
+            about.Font = new System.Drawing.Font("Arial", 10, FontStyle.Bold);
+            about.ForeColor = System.Drawing.Color.Black;
+            about.BackColor = System.Drawing.Color.AntiqueWhite;
+
+            p.Controls.Add(timeline);
+            p.Controls.Add(about);
+            p.Controls.Add(butoane);
+
+
+
+        }
+    }
+    public class info
+    {
+        Label studii;
+        Label oras;
+        Label din;
+        Label nume;
+        int top = 35;
+
+        public info(Panel p)
+        {
+            nume = new Label();
+
+            nume.Name = "lbl2";
+            nume.Font = new System.Drawing.Font("Arial", 11, FontStyle.Bold);
+            nume.Text = "Despre";
+      
+
+            p.Controls.Add(nume);
+
+            studii = new Label();
+            
+            studii.Name = "lbl2";
+            studii.Font = new System.Drawing.Font("Arial", 9, FontStyle.Bold);
+            studii.Text = "A studiat la...";
+            studii.Top = top ;
+         
+            p.Controls.Add(studii);
+            oras = new Label();
+            oras.Text = "Locuieste in...";
+            oras.Top=top+35;
+            oras.Font = new System.Drawing.Font("Arial", 9, FontStyle.Bold);
+            din = new Label();
+            din.Text = "Din..";
+            din.Top=top+70;
+            din.Font = new System.Drawing.Font("Arial", 9, FontStyle.Bold);
+            p.Controls.Add(oras);
+            p.Controls.Add(din);
+
+        }
+    }
+
+    public class prieteni
+    {
+
+        Label nume;
+        PictureBox []pic= new PictureBox[6];
+
+        public prieteni(Panel p)
+        {
+
+            for (int i = 0; i < 6; i++)
+            {
+                pic[i] = new PictureBox();
+                pic[i].Width = 60;
+                pic[i].Height = 60;
+                pic[i].Left = (i%3) * 60+5;
+                pic[i].Top = (i / 3) * 60+40;
+                pic[i].ImageLocation = @"..\..\imagini\cover1.jpg";
+                p.Controls.Add(pic[i]);
+
+            }
+            nume = new Label();
+            nume.Name = "lbl2";
+            nume.Font = new System.Drawing.Font("Arial", 11, FontStyle.Bold);
+            nume.Text = "Prieteni";
+
+            p.Controls.Add(nume);
+
+        }
+    }
+
     public class post
     {
         TextBox txt;
         Label lbl;
         Label com;
         Label like;
-        static int top = 260;
-        int left = 200;
+        static int top = 300;
+        int left = 230;
         public post(Panel p)
         {
              lbl = new Label();
